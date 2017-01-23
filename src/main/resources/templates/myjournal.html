@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="template :: dochead">
+</head>
+<body>
+
+	<div th:replace="template :: navigation"></div>
+
+	<h1>My Journal</h1>
+	
+	<table id = "myjournal">
+		<thead>
+			<tr>
+				<td><label>Entry Name</label></td>
+				<td><label>Calories</label></td>
+				<td><label>Fats</label></td>
+				<td><label>Carbohydrates</label></td>
+				<td><label>Proteins</label></td>
+				<td><label>Date</label></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="entry : ${journal}">
+				<td th:text="${entry.name}"></td>
+				<td th:text="${entry.calories}"></td>
+				<td th:text="${entry.fats}"></td>
+				<td th:text="${entry.carbohydrates}"></td>
+				<td th:text="${entry.proteins}"></td>
+				<td th:text="${entry.createdString}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<form id = "myjournal-entry" method="post">
+	<h3>Make an Entry</h3>
+	    <table>
+	        <tr>
+	            <td><label>Entry Name</label></td>
+	            <td>
+	                <input name = "entry"></input>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td><label>Calories</label></td>
+	            <td>
+	                <input name = "calories"></input>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td><label>Fats</label></td>
+	            <td>
+	                <input name = "fats"></input>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td><label>Carbohydrates</label></td>
+	            <td>
+	                <input name = "carbohydrates"></input>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td><label>Proteins</label></td>
+	            <td>
+	                <input name = "proteins"></input>
+	            </td>
+	        </tr>
+	    </table>
+	    <button type="submit">Submit Entry</button>
+	</form>
+
+</body>
+</html>

@@ -6,9 +6,43 @@
 
 	<div th:replace="template :: navigation"></div>
 
-	<h1>Add a Food!</h1>
-	
-	<p>Add a Food!</p>
+	<h1>Add a Food</h1>
+	<form method="post">
+	    <table>
+	        <tr>
+	            <td><label>Food Name</label></td>
+	            <td>
+	                <input name="foodname" type="text" th:value="${foodname}"></input>
+	                <span class="error" th:text="${foodname_error}"></span>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td><label>Calories</label></td>
+	            <td>
+	                <input name="calories" type="text" th:value="${calories}"></input>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td><label>Fats</label></td>
+	            <td>
+	                <input name="fats" type="text" th:value="${fats}"></input>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td><label>Carbohydrates</label></td>
+	            <td>
+	                <input name="carbohydrates" type="text" th:value="${carbohydrates}"></input>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td><label>Proteins</label></td>
+	            <td>
+	                <input name="proteins" type="text" th:value="${proteins}"></input>
+	            </td>
+	        </tr>
+	    </table>
+	    <button type="submit">Add Food</button>
+	</form>
 
 </body>
 </html>

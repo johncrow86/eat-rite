@@ -56,7 +56,7 @@ public class AuthenticationController extends AbstractController {
 		userDao.save(u);
 		setUserInSession(request.getSession(), u);
 			
-;		return "redirect:home";
+;		return "redirect:myjournal";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -82,7 +82,7 @@ public class AuthenticationController extends AbstractController {
 		
 		setUserInSession(request.getSession(), u);
 		
-		return "redirect:blog/newpost";
+		return "redirect:myjournal";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

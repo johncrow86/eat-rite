@@ -1,10 +1,13 @@
 package org.launchcode.eatrite.models;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +20,8 @@ public class User extends AbstractEntity{
 	private String username;
 	private String pwHash;
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	
+	private List<JournalEntry> journal;
 	
 	public User() {}
 
@@ -64,7 +69,7 @@ public class User extends AbstractEntity{
 	}
 	
 	public static boolean isValidPassword(String password) {
-		Pattern validUsernamePattern = Pattern.compile("(\\S){6,20}");
+		Pattern validUsernamePattern = Pattern.compile("(\\S){5,20}");
 		Matcher matcher = validUsernamePattern.matcher(password);
 		return matcher.matches();
 	}
@@ -73,5 +78,19 @@ public class User extends AbstractEntity{
 		Pattern validUsernamePattern = Pattern.compile("[a-zA-Z][a-zA-Z0-9_-]{4,11}");
 		Matcher matcher = validUsernamePattern.matcher(username);
 		return matcher.matches();
+	}
+	
+	protected void addJournalEntry(JournalEntry je) {
+		journal.add(je);
+	}
+	
+	@OneToMany
+	@JoinColumn(name = "owner_uid")
+	public List<JournalEntry> getJournal() {
+		return journal;
+	}
+	
+	public void setJournal(List<JournalEntry> journal) {
+		this.journal = journal;
 	}
 }

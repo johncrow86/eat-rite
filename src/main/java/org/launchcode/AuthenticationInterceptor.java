@@ -22,7 +22,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 		
 		// Restricted URLs
-		List<String> authPages = Arrays.asList("/test");
+		List<String> authPages = Arrays.asList("/myjournal");
 		
 		// Require sign-in for auth pages
         if ( authPages.contains(request.getRequestURI()) ) {

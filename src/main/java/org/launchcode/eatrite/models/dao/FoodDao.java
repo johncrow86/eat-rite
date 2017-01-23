@@ -1,5 +1,7 @@
 package org.launchcode.eatrite.models.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.launchcode.eatrite.models.Food;
@@ -11,4 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface FoodDao extends CrudRepository<Food, Integer> {
 
 	Food findByName(String name);
+	
+	List<Food> findAll();
 }
