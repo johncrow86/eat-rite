@@ -35,16 +35,14 @@ public class WelcomeController extends AbstractController {
 		
 		List<JournalEntry> journal = journalEntryDao.findByOwner(getUserFromSession(request.getSession()));
 		
-		createdString = createdString.charAt(0) + createdString.charAt(1) + "/" +
-						createdString.charAt(2) + createdString.charAt(3) + "/" +
-						createdString.charAt(4) + createdString.charAt(5) + createdString.charAt(6) + createdString.charAt(7);
-						
-		for(JournalEntry j : journal) {
-			if (!j.getCreatedString().equals(createdString)) {
-				journal.remove(j);
-			}
-		}
 		
+//		for (JournalEntry je : journal) {
+//			if (!je.getCreatedString().equals(createdString)) {
+//				journal.remove(je);
+//			}
+//		}
+		
+		model.addAttribute("journal", journal);
 		return "myjournal";
 	}
 	

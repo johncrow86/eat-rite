@@ -26,7 +26,7 @@ public class JournalEntry extends AbstractEntity{
 	private Date created;
 	private String createdString;
 	
-	private DateFormat df = new SimpleDateFormat("MM.dd.yyyy");
+	private DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 	
 	public JournalEntry() {}
 	
