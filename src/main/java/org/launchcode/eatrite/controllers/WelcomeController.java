@@ -33,14 +33,8 @@ public class WelcomeController extends AbstractController {
 	@RequestMapping(value = "/myjournal/{createdString}", method = RequestMethod.GET)
 	public String myJournalCreated(@PathVariable String createdString, HttpServletRequest request, Model model) {
 		
-		List<JournalEntry> journal = journalEntryDao.findByOwner(getUserFromSession(request.getSession()));
+		List<JournalEntry> journal = journalEntryDao.findByOwnerAndCreatedString(getUserFromSession(request.getSession()), createdString);
 		
-		
-//		for (JournalEntry je : journal) {
-//			if (!je.getCreatedString().equals(createdString)) {
-//				journal.remove(je);
-//			}
-//		}
 		
 		model.addAttribute("journal", journal);
 		return "myjournal";

@@ -14,5 +14,7 @@ public interface JournalEntryDao extends CrudRepository<JournalEntry, Integer> {
 	
 	List<JournalEntry> findByOwner(User user);
 	List<JournalEntry> findAll();
+	
+	List<JournalEntry> findByOwnerAndCreatedString(User user, String createdString);
 
 }
