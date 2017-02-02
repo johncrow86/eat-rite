@@ -21,43 +21,6 @@ public class WelcomeController extends AbstractController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/myjournal", method = RequestMethod.GET)
-	public String myJournalForm(HttpServletRequest request, Model model) {
-		
-		List<JournalEntry> journal = journalEntryDao.findByOwner(getUserFromSession(request.getSession()));
-		model.addAttribute("journal", journal);
-		
-		return "myjournal";
-	}
-	
-	@RequestMapping(value = "/myjournal/{createdString}", method = RequestMethod.GET)
-	public String myJournalCreated(@PathVariable String createdString, HttpServletRequest request, Model model) {
-		
-		List<JournalEntry> journal = journalEntryDao.findByOwnerAndCreatedString(getUserFromSession(request.getSession()), createdString);
-		
-		
-		model.addAttribute("journal", journal);
-		return "myjournal";
-	}
-	
-	@RequestMapping(value = "/myjournal", method = RequestMethod.POST)
-	public String myJournal(HttpServletRequest request, Model model) {
-		
-		String entry = request.getParameter("entry");
-		double calories = Double.valueOf(request.getParameter("calories"));
-		double fats = Double.valueOf(request.getParameter("fats"));
-		double carbohydrates = Double.valueOf(request.getParameter("carbohydrates"));
-		double proteins = Double.valueOf(request.getParameter("proteins"));
-		
-		List<JournalEntry> journal = journalEntryDao.findByOwner(getUserFromSession(request.getSession()));
-		model.addAttribute("journal", journal);
-		
-		JournalEntry je = new JournalEntry(getUserFromSession(request.getSession()), entry, calories, fats, carbohydrates, proteins);
-		journalEntryDao.save(je);
-		
-		return "redirect:myjournal";
-	}
-	
 	@RequestMapping(value = "/addfood", method = RequestMethod.GET)
 	public String addFoodForm(){
 		return "addfood";

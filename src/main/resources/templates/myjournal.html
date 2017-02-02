@@ -8,9 +8,9 @@
 
 	<h1>My Journal</h1>
 	
-	<div th:replace="template :: date_select"></div>
+	<div th:replace="template :: date-select"></div>
 	
-	<table id = "myjournal">
+	<table id="myjournal">
 		<thead>
 			<tr>
 				<td><label>Entry Name</label></td>
@@ -33,43 +33,7 @@
 		</tbody>
 	</table>
 	
-	<form id = "myjournal-entry" method="post">
-	<h3>Make an Entry</h3>
-	    <table>
-	        <tr>
-	            <td><label>Entry Name</label></td>
-	            <td>
-	                <input name = "entry"></input>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td><label>Calories</label></td>
-	            <td>
-	                <input name = "calories"></input>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td><label>Fats</label></td>
-	            <td>
-	                <input name = "fats"></input>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td><label>Carbohydrates</label></td>
-	            <td>
-	                <input name = "carbohydrates"></input>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td><label>Proteins</label></td>
-	            <td>
-	                <input name = "proteins"></input>
-	            </td>
-	        </tr>
-	    </table>
-	    <button type="submit">Submit Entry</button>
-	    <span class="error" th:text="${invalid_data}"></span>
-	</form>
+	<span th:replace="template :: myjournal-entry"></span>
 
 </body>
 </html>
