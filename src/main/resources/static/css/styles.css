@@ -63,5 +63,13 @@ nav ul li {
 }
 
 #myjournal-entry {
+	display: inline-block;
 	float: right;
+}
+
+#macro-totals {
+	display: inline-block;
+}
+#macro-totals td {
+	border: black solid 1px;
 }

@@ -33,6 +33,32 @@
 		</tbody>
 	</table>
 	
+	<table id="macro-totals">
+		<thead>
+			<tr>
+				<td colspan="2">Daily Totals</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Calories</td>
+				<td th:text="${macroTotals[0]}"></td>
+			</tr>
+			<tr>
+				<td>Fats</td>
+				<td th:text="${macroTotals[1]}"></td>
+			</tr>
+			<tr>
+				<td>Carbohydrates</td>
+				<td th:text="${macroTotals[2]}"></td>
+			</tr>
+			<tr>
+				<td>Proteins</td>
+				<td th:text="${macroTotals[3]}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
 	<span th:replace="template :: myjournal-entry"></span>
 
 </body>
