@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,6 +39,30 @@ public class JournalController extends AbstractController {
 	@RequestMapping(value = "/myjournal", method = RequestMethod.POST)
 	public String myJournal(HttpServletRequest request, Model model) {
 		
+		boolean hasError = false;
+		Pattern validDoublePattern = Pattern.compile("[0-9]");
+		Matcher matcher;
+		
+		matcher = validDoublePattern.matcher(request.getParameter("calories"));
+		if (!matcher.matches()) {
+			hasError = true;
+			model.addAttribute("invalid_input_error", "Calories must be a number");
+		}
+		
+		if (hasError) {
+			Date today = new Date();
+			DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+			String todayString = df.format(today);
+			
+			List<JournalEntry> journal = journalEntryDao.findByOwnerAndCreatedString(getUserFromSession(request.getSession()), todayString);
+			model.addAttribute("journal", journal);
+			
+			double[] macroTotals = totalMacros(journal);
+			model.addAttribute("macroTotals", macroTotals);
+			
+			return "myjournal";
+		}
+		
 		String entry = request.getParameter("entry");
 		double calories = Double.valueOf(request.getParameter("calories"));
 		double fats = Double.valueOf(request.getParameter("fats"));
@@ -46,7 +72,11 @@ public class JournalController extends AbstractController {
 		JournalEntry je = new JournalEntry(getUserFromSession(request.getSession()), entry, calories, fats, carbohydrates, proteins);
 		journalEntryDao.save(je);
 		
-		List<JournalEntry> journal = journalEntryDao.findByOwner(getUserFromSession(request.getSession()));
+		Date today = new Date();
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+		String todayString = df.format(today);
+		
+		List<JournalEntry> journal = journalEntryDao.findByOwnerAndCreatedString(getUserFromSession(request.getSession()), todayString);
 		model.addAttribute("journal", journal);
 		
 		double[] macroTotals = totalMacros(journal);
