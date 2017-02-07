@@ -41,12 +41,23 @@ public class JournalController extends AbstractController {
 		
 		boolean hasError = false;
 		Pattern validDoublePattern = Pattern.compile("[0-9]");
-		Matcher matcher;
+		Matcher calorieMatcher = validDoublePattern.matcher(request.getParameter("calories"));
+		Matcher fatsMatcher = validDoublePattern.matcher(request.getParameter("fats"));
+		Matcher carbohydratesMatcher = validDoublePattern.matcher(request.getParameter("carbohydrates"));
+		Matcher proteinsMatcher = validDoublePattern.matcher(request.getParameter("proteins"));
 		
-		matcher = validDoublePattern.matcher(request.getParameter("calories"));
-		if (!matcher.matches()) {
+		if (!calorieMatcher.matches()) {
 			hasError = true;
 			model.addAttribute("invalid_input_error", "Calories must be a number");
+		} else if (!fatsMatcher.matches()) {
+			hasError = true;
+			model.addAttribute("invalid_input_error", "Fats must be a number");
+		} else if (!carbohydratesMatcher.matches()) {
+			hasError = true;
+			model.addAttribute("invalid_input_error", "Carbohydrates must be a number");
+		} else if (!proteinsMatcher.matches()) {
+			hasError = true;
+			model.addAttribute("invalid_input_error", "Proteins must be a number");
 		}
 		
 		if (hasError) {
@@ -83,6 +94,13 @@ public class JournalController extends AbstractController {
 		model.addAttribute("macroTotals", macroTotals);
 		
 		return "myjournal";
+	}
+	
+	@RequestMapping(value = "/myjournaldelete", method = RequestMethod.POST)
+	public String myJournalDelete(HttpServletRequest request) {
+		List<JournalEntry> journal = journalEntryDao.findByOwnerOrderByCreatedDesc(getUserFromSession(request.getSession()));
+		journalEntryDao.delete(journal.get(0));
+		return "redirect:myjournal";
 	}
 	
 	@RequestMapping(value = "/myjournal/all", method = RequestMethod.GET)

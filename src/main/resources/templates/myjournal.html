@@ -60,6 +60,10 @@
 	</table>
 	
 	<span th:replace="template :: myjournal-entry"></span>
+	
+	<form id="myjournal-delete" method="post" action="/myjournaldelete">
+		<button type="submit">Delete Last Entry</button>
+	</form>
 
 </body>
 </html>
