@@ -39,8 +39,9 @@ public class JournalController extends AbstractController {
 	@RequestMapping(value = "/myjournal", method = RequestMethod.POST)
 	public String myJournal(HttpServletRequest request, Model model) {
 		
+		//validate input
 		boolean hasError = false;
-		Pattern validDoublePattern = Pattern.compile("[0-9]");
+		Pattern validDoublePattern = Pattern.compile("[0-9]+");
 		Matcher calorieMatcher = validDoublePattern.matcher(request.getParameter("calories"));
 		Matcher fatsMatcher = validDoublePattern.matcher(request.getParameter("fats"));
 		Matcher carbohydratesMatcher = validDoublePattern.matcher(request.getParameter("carbohydrates"));
@@ -60,6 +61,7 @@ public class JournalController extends AbstractController {
 			model.addAttribute("invalid_input_error", "Proteins must be a number");
 		}
 		
+		//if invalid input reload page with errors
 		if (hasError) {
 			Date today = new Date();
 			DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
@@ -74,15 +76,18 @@ public class JournalController extends AbstractController {
 			return "myjournal";
 		}
 		
+		//store validated input
 		String entry = request.getParameter("entry");
 		double calories = Double.valueOf(request.getParameter("calories"));
 		double fats = Double.valueOf(request.getParameter("fats"));
 		double carbohydrates = Double.valueOf(request.getParameter("carbohydrates"));
 		double proteins = Double.valueOf(request.getParameter("proteins"));
 		
+		//save data entry
 		JournalEntry je = new JournalEntry(getUserFromSession(request.getSession()), entry, calories, fats, carbohydrates, proteins);
 		journalEntryDao.save(je);
 		
+		//load data to display
 		Date today = new Date();
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		String todayString = df.format(today);

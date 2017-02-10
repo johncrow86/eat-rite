@@ -20,24 +20,28 @@
 	            <td><label>Calories</label></td>
 	            <td>
 	                <input name="calories" type="text" th:value="${calories}"></input>
+	                <span class="error" th:text="${calorie_error}"></span>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td><label>Fats</label></td>
 	            <td>
 	                <input name="fats" type="text" th:value="${fats}"></input>
+	                <span class="error" th:text="${fats_error}"></span>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td><label>Carbohydrates</label></td>
 	            <td>
 	                <input name="carbohydrates" type="text" th:value="${carbohydrates}"></input>
+	                <span class="error" th:text="${carbohydrates_error}"></span>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td><label>Proteins</label></td>
 	            <td>
 	                <input name="proteins" type="text" th:value="${proteins}"></input>
+	                <span class="error" th:text="${proteins_error}"></span>
 	            </td>
 	        </tr>
 	    </table>

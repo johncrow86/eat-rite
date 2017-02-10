@@ -9,6 +9,12 @@
 	<h1>Eat Rite!</h1>
 	
 	<a href="/addfood">Add a Food!</a>
+	
+	<ul>
+		<li th:each="f : ${food}">
+			<span th:text="${f.name}"></span>
+		</li>
+	</ul>
 
 </body>
 </html>

@@ -15,4 +15,5 @@ public interface FoodDao extends CrudRepository<Food, Integer> {
 	Food findByName(String name);
 	
 	List<Food> findAll();
+	List<Food> findAllByOrderByName();
 }
