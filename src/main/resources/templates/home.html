@@ -12,7 +12,7 @@
 	
 	<ul>
 		<li th:each="f : ${food}">
-			<span th:text="${f.name}"></span>
+			<a th:href="'/food/' + ${f.name}" th:text="${f.name}"></a>
 		</li>
 	</ul>
 

@@ -151,6 +151,9 @@ public class JournalController extends AbstractController {
 		return "myjournal";
 	}
 	
+	/*
+	 * Function to total the daily macros
+	 */
 	private double[] totalMacros (List<JournalEntry> journal) {
 
 		double calories = 0;

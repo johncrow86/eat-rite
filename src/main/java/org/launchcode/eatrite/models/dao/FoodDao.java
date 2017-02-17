@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FoodDao extends CrudRepository<Food, Integer> {
 
+	Food findByUid(int uid);
 	Food findByName(String name);
 	
 	List<Food> findAll();

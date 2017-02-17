@@ -31,6 +31,38 @@ public class WelcomeController extends AbstractController {
 		return "addfood";
 	}
 	
+	@RequestMapping(value = "/food/{foodName}", method = RequestMethod.GET)
+	public String singleFood(@PathVariable String foodName, Model model) {
+		
+		Food food = foodDao.findByName(foodName);
+		model.addAttribute(food);
+		
+		return "singlefood";
+	}
+	
+	@RequestMapping(value = "/food/{foodName}", method = RequestMethod.POST)
+	public String postSingleFood(HttpServletRequest request, Model model) {
+		
+		Integer foodId = Integer.valueOf(request.getParameter("foodId"));
+		Food food = foodDao.findByUid(foodId);
+		Integer userId = (Integer) request.getSession().getAttribute(AbstractController.userSessionKey);
+		User user;
+		
+		if (userId != null) {
+        	user = userDao.findByUid(userId);
+        	if (user != null) {
+        		JournalEntry je = new JournalEntry(user, food);
+        		journalEntryDao.save(je);
+        	}
+        } else {
+        	model.addAttribute(food);
+        	model.addAttribute("error", "Must be logged in to add");
+        	return "singlefood";
+        }
+		
+		return "redirect:/myjournal";
+	}
+	
 	@RequestMapping(value = "/addfood", method = RequestMethod.POST)
 	public String addFood(HttpServletRequest request, Model model) {
 

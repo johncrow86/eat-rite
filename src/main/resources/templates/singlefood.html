@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="template :: dochead">
+</head>
+<body>
+
+	<div th:replace="template :: navigation"></div>
+
+	<h1>About this Food!</h1>
+	    <table>
+	        <tr>
+	            <td><label>Food Name</label></td>
+	            <td width="200px" align="right" th:text="${food.name}"></td>
+	        </tr>
+	        <tr>
+	            <td><label>Calories</label></td>
+	            <td width="200px" align="right" th:text="${food.calories}"></td>
+	        </tr>
+	        <tr>
+	            <td><label>Fats</label></td>
+	            <td width="200px" align="right" th:text="${food.fats}"></td>
+	        </tr>
+	        <tr>
+	            <td><label>Carbohydrates</label></td>
+	            <td width="200px" align="right" th:text="${food.carbohydrates}"></td>
+	        </tr>
+	        <tr>
+	            <td><label>Proteins</label></td>
+	            <td width="200px" align="right" th:text="${food.proteins}"></td>
+	        </tr>
+	    </table>
+	    
+	    <form method="post">
+	    	<input type="hidden" name="foodId" th:value="${food.uid}"></input>
+	    	<button type="submit">Add to Journal</button>
+	    	<span class="error" th:text="${error}"></span>
+	    </form>
+
+</body>
+</html>

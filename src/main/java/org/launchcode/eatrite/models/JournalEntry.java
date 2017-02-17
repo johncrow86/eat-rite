@@ -46,6 +46,16 @@ public class JournalEntry extends AbstractEntity{
 		owner.addJournalEntry(this);
 	}
 	
+	public JournalEntry(User owner, Food food) {
+		this.owner = owner;
+		this.name = food.getName();
+		this.calories = food.getCalories();
+		this.fats = food.getFats();
+		this.proteins = food.getProteins();
+		this.created = new Date();
+		this.createdString = df.format(created);
+	}
+	
 	@Column(name = "name")
 	public String getName() {
 		return name;
