@@ -47,13 +47,19 @@ public class JournalEntry extends AbstractEntity{
 	}
 	
 	public JournalEntry(User owner, Food food) {
+		
+		super();
+		
 		this.owner = owner;
 		this.name = food.getName();
 		this.calories = food.getCalories();
 		this.fats = food.getFats();
+		this.carbohydrates = food.getCarbohydrates();
 		this.proteins = food.getProteins();
 		this.created = new Date();
 		this.createdString = df.format(created);
+		
+		owner.addJournalEntry(this);
 	}
 	
 	@Column(name = "name")
@@ -124,6 +130,7 @@ public class JournalEntry extends AbstractEntity{
 		this.createdString = createdString;
 	}
 	
+	@NotNull
 	@ManyToOne
 	public User getOwner() {
 		return owner;
